@@ -831,7 +831,7 @@ bool CFBG::FillPlayersToCFBG(BattlegroundQueue* bgqueue, Battleground* bg, Battl
                     std::erase(groups, gInfo);
             }
             else
-                LOG_FATAL("module", "> CFBG: Incorrect conditions for check even teams. Players need: {}. Target team: {}", playersNeed, targetTeam);
+                LOG_FATAL("module", "> CFBG: Incorrect conditions for check even teams. Players need: {}. Target team: {}", playersNeed, (uint8)targetTeam);
         }
 
         // #2 if all teams even and `MaxPlayersThreshold` complete

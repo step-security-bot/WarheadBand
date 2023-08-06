@@ -305,7 +305,8 @@ public:
             return false;
         }
 
-        handler->PSendSysMessage(LANG_YOU_CHANGE_FACTION, target->GetGUID().GetCounter(), factionid, flag, npcflag, dyflag);
+        handler->PSendSysMessage(LANG_YOU_CHANGE_FACTION, target->GetGUID().GetCounter(), factionid, AsUnderlyingType(flag),
+                                 AsUnderlyingType(npcflag), dyflag);
 
         target->SetFaction(factionid);
         target->ReplaceAllUnitFlags(flag);

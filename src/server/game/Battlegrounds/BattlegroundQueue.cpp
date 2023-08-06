@@ -175,7 +175,7 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* group, Battle
 
     sScriptMgr->OnAddGroup(this, ginfo, group, isPremade);
 
-    LOG_DEBUG("bg.battleground", "Adding Group to BattlegroundQueue bgTypeId: {}, bracket_id: {}, index: {}", bgTypeId, bracketId, index);
+    LOG_DEBUG("bg.battleground", "Adding Group to BattlegroundQueue bgTypeId: {}, bracket_id: {}, index: {}", (uint32)bgTypeId, (uint32)bracketId, index);
 
     //add players from group to ginfo
     if (group)
@@ -751,14 +751,14 @@ void BattlegroundQueue::BattlegroundQueueUpdate(uint32 diff, BattlegroundTypeId 
     Battleground* bg_template = sBattlegroundMgr->GetBattlegroundTemplate(bgTypeId);
     if (!bg_template)
     {
-        LOG_ERROR("bg.battleground", "Battleground: Update: bg template not found for {}", bgTypeId);
+        LOG_ERROR("bg.battleground", "Battleground: Update: bg template not found for {}", (uint32)bgTypeId);
         return;
     }
 
     PvPDifficultyEntry const* bracketEntry = GetBattlegroundBracketById(bg_template->GetMapId(), bracket_id);
     if (!bracketEntry)
     {
-        LOG_ERROR("bg.battleground", "Battleground: Update: bg bracket entry not found for map {} bracket id {}", bg_template->GetMapId(), bracket_id);
+        LOG_ERROR("bg.battleground", "Battleground: Update: bg bracket entry not found for map {} bracket id {}", bg_template->GetMapId(), (uint32)bracket_id);
         return;
     }
 
@@ -786,7 +786,7 @@ void BattlegroundQueue::BattlegroundQueueUpdate(uint32 diff, BattlegroundTypeId 
         Battleground* bg = sBattlegroundMgr->CreateNewBattleground(bgTypeId, bracketEntry, 0, false);
         if (!bg)
         {
-            LOG_ERROR("bg.battleground", "BattlegroundQueue::Update - Cannot create battleground: {}", bgTypeId);
+            LOG_ERROR("bg.battleground", "BattlegroundQueue::Update - Cannot create battleground: {}", (uint32)bgTypeId);
             return;
         }
 
@@ -810,7 +810,7 @@ void BattlegroundQueue::BattlegroundQueueUpdate(uint32 diff, BattlegroundTypeId 
             Battleground* bg = sBattlegroundMgr->CreateNewBattleground(bgTypeId, bracketEntry, arenaType, false);
             if (!bg)
             {
-                LOG_ERROR("bg.battleground", "BattlegroundQueue::Update - Cannot create battleground: {}", bgTypeId);
+                LOG_ERROR("bg.battleground", "BattlegroundQueue::Update - Cannot create battleground: {}", (uint32)bgTypeId);
                 return;
             }
 
@@ -1236,7 +1236,7 @@ void BattlegroundQueue::InviteGroupToBG(GroupQueueInfo* ginfo, Battleground* bg,
         ASSERT(queueSlot < PLAYER_MAX_BATTLEGROUND_QUEUES);
 
         LOG_DEBUG("bg.battleground", "Battleground: invited player {} {} to BG instance {} queueindex {} bgtype {}",
-            player->GetName(), player->GetGUID().ToString(), bg->GetInstanceID(), queueSlot, bgTypeId);
+            player->GetName(), player->GetGUID().ToString(), bg->GetInstanceID(), queueSlot, (uint32)bgTypeId);
 
         // send status packet
         WorldPacket data;

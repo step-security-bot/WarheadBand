@@ -462,7 +462,7 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket& recvData)
         bg = sBattlegroundMgr->GetBattlegroundTemplate(bgTypeId);
         if (!bg)
         {
-            LOG_ERROR("network", "BattlegroundHandler: bg_template not found for type id {}.", bgTypeId);
+            LOG_ERROR("network", "BattlegroundHandler: bg_template not found for type id {}.", (uint32)bgTypeId);
             return;
         }
     }
@@ -491,7 +491,7 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket& recvData)
         if (_player->getLevel() > bg->GetMaxLevel())
         {
             LOG_ERROR("network", "Player {} {} has level ({}) higher than maxlevel ({}) of battleground ({})! Do not port him to battleground!",
-                _player->GetName(), _player->GetGUID().ToString(), _player->getLevel(), bg->GetMaxLevel(), bg->GetBgTypeID());
+                _player->GetName(), _player->GetGUID().ToString(), _player->getLevel(), bg->GetMaxLevel(), (uint32)bg->GetBgTypeID());
             action = 0;
         }
     }

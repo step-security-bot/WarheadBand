@@ -43,7 +43,7 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
     // ASSERT(ConditionTarget < MAX_CONDITION_TARGETS);
     if (ConditionTarget >= MAX_CONDITION_TARGETS)
     {
-        LOG_ERROR("condition", "ConditionTarget {} for for condition (Entry: {} Type: {} Group: {}) is greater or equal than MAX_CONDITION_TARGETS", ConditionTarget, SourceEntry, SourceType, SourceGroup);
+        LOG_ERROR("condition", "ConditionTarget {} for for condition (Entry: {} Type: {} Group: {}) is greater or equal than MAX_CONDITION_TARGETS", ConditionTarget, SourceEntry, (uint32)SourceType, SourceGroup);
         return false;
     }
 
@@ -51,7 +51,7 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
     // object not present, return false
     if (!object)
     {
-        LOG_DEBUG("condition", "Condition object not found for condition (Entry: {} Type: {} Group: {})", SourceEntry, SourceType, SourceGroup);
+        LOG_DEBUG("condition", "Condition object not found for condition (Entry: {} Type: {} Group: {})", SourceEntry, (uint32)SourceType, SourceGroup);
         return false;
     }
     bool condMeets = false;
@@ -862,7 +862,7 @@ bool ConditionMgr::IsObjectMeetToConditionList(ConditionSourceInfo& sourceInfo, 
     std::map<uint32, bool> ElseGroupStore;
     for (ConditionList::const_iterator i = conditions.begin(); i != conditions.end(); ++i)
     {
-        LOG_DEBUG("condition", "ConditionMgr::IsPlayerMeetToConditionList condType: {} val1: {}", (*i)->ConditionType, (*i)->ConditionValue1);
+        LOG_DEBUG("condition", "ConditionMgr::IsPlayerMeetToConditionList condType: {} val1: {}", (uint32)(*i)->ConditionType, (*i)->ConditionValue1);
         if ((*i)->isLoaded())
         {
             //! Find ElseGroup in ElseGroupStore
@@ -1473,7 +1473,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1490,7 +1490,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1499,7 +1499,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
     {
         if (!LootTemplates_Fishing.HaveLootFor(cond->SourceGroup))
         {
-            LOG_ERROR("db.query", "SourceGroup {} in `condition` table, does not exist in `fishing_loot_template`, ignoring.", cond->SourceGroup);
+            LOG_ERROR("db.query", "SourceGroup {} in `condition` table, does not exist in `fishing_loot_template`, ignoring.", (uint32)cond->SourceGroup);
             return false;
         }
 
@@ -1507,7 +1507,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1516,7 +1516,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
     {
         if (!LootTemplates_Gameobject.HaveLootFor(cond->SourceGroup))
         {
-            LOG_ERROR("db.query", "SourceGroup {} in `condition` table, does not exist in `gameobject_loot_template`, ignoring.", cond->SourceGroup);
+            LOG_ERROR("db.query", "SourceGroup {} in `condition` table, does not exist in `gameobject_loot_template`, ignoring.", (uint32)cond->SourceGroup);
             return false;
         }
 
@@ -1524,7 +1524,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1541,7 +1541,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1558,7 +1558,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1575,7 +1575,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1592,7 +1592,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1609,7 +1609,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1626,7 +1626,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1643,7 +1643,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1660,7 +1660,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1809,7 +1809,7 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         ItemTemplate const* pItemProto = sObjectMgr->GetItemTemplate(cond->SourceEntry);
         if (!pItemProto && !loot->isReference(cond->SourceEntry))
         {
-            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", cond->SourceType, cond->SourceEntry);
+            LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, does not exist in `item_template`, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
             return false;
         }
         break;
@@ -1842,7 +1842,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
 
     if (cond->ConditionTarget >= cond->GetMaxAvailableConditionTargets())
     {
-        LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, has incorrect ConditionTarget set, ignoring.", cond->SourceType, cond->SourceEntry);
+        LOG_ERROR("db.query", "SourceType {}, SourceEntry {} in `condition` table, has incorrect ConditionTarget set, ignoring.", (uint32)cond->SourceType, cond->SourceEntry);
         return false;
     }
 
@@ -1987,7 +1987,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
     case CONDITION_QUESTSTATE:
         if (cond->ConditionValue2 >= (1 << MAX_QUEST_STATUS))
         {
-            LOG_ERROR("db.query", "ConditionType ({}) has invalid state mask ({}), skipped.", cond->ConditionType, cond->ConditionValue2);
+            LOG_ERROR("db.query", "ConditionType ({}) has invalid state mask ({}), skipped.", (uint32)cond->ConditionType, cond->ConditionValue2);
             return false;
         }
         break;

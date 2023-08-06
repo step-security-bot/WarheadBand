@@ -80,7 +80,7 @@ namespace DisableMgr
             DisableType type = DisableType(fields[0].Get<uint32>());
             if (type >= MAX_DISABLE_TYPES)
             {
-                LOG_ERROR("db.query", "Invalid type {} specified in `disables` table, skipped.", type);
+                LOG_ERROR("db.query", "Invalid type {} specified in `disables` table, skipped.", (uint32)type);
                 continue;
             }
 

@@ -604,7 +604,7 @@ bool BattlegroundAV::UpdatePlayerScore(Player* player, uint32 type, uint32 value
 void BattlegroundAV::EventPlayerDestroyedPoint(BG_AV_Nodes node)
 {
     uint32 object = GetObjectThroughNode(node);
-    LOG_DEBUG("bg.battleground", "bg_av: player destroyed point node {} object {}", node, object);
+    LOG_DEBUG("bg.battleground", "bg_av: player destroyed point node {} object {}", (uint32)node, object);
 
     //despawn banner
     SpawnBGObject(object, RESPAWN_ONE_DAY);
@@ -781,7 +781,7 @@ void BattlegroundAV::PopulateNode(BG_AV_Nodes node)
         if (BgCreatures[node])
             DelCreature(node);
         if (!AddSpiritGuide(node, BG_AV_CreaturePos[node][0], BG_AV_CreaturePos[node][1], BG_AV_CreaturePos[node][2], BG_AV_CreaturePos[node][3], ownerId))
-            LOG_ERROR("bg.battleground", "AV: couldn't spawn spiritguide at node {}", node);
+            LOG_ERROR("bg.battleground", "AV: couldn't spawn spiritguide at node {}", (uint32)node);
     }
     for (uint8 i = 0; i < 4; i++)
         AddAVCreature(creatureid, c_place + i);
@@ -860,7 +860,7 @@ BG_AV_Nodes BattlegroundAV::GetNodeThroughObject(uint32 object)
 uint32 BattlegroundAV::GetObjectThroughNode(BG_AV_Nodes node)
 {
     //this function is the counterpart to GetNodeThroughObject()
-    LOG_DEBUG("bg.battleground", "bg_AV GetObjectThroughNode {}", node);
+    LOG_DEBUG("bg.battleground", "bg_AV GetObjectThroughNode {}", (uint32)node);
     if (m_Nodes[node].OwnerId == TEAM_ALLIANCE)
     {
         if (m_Nodes[node].State == POINT_ASSAULTED)
@@ -891,7 +891,7 @@ uint32 BattlegroundAV::GetObjectThroughNode(BG_AV_Nodes node)
     }
     else if (m_Nodes[node].OwnerId == TEAM_NEUTRAL)
         return BG_AV_OBJECT_FLAG_N_SNOWFALL_GRAVE;
-    LOG_ERROR("bg.battleground", "BattlegroundAV: Error! GetPlaceNode couldn't resolve node {}", node);
+    LOG_ERROR("bg.battleground", "BattlegroundAV: Error! GetPlaceNode couldn't resolve node {}", (uint32)node);
     ABORT();
     return 0;
 }
@@ -942,10 +942,10 @@ void BattlegroundAV::EventPlayerDefendsPoint(Player* player, uint32 object)
         EventPlayerAssaultsPoint(player, object);
         return;
     }
-    LOG_DEBUG("bg.battleground", "player defends point object: {} node: {}", object, node);
+    LOG_DEBUG("bg.battleground", "player defends point object: {} node: {}", object, (uint32)node);
     if (m_Nodes[node].PrevOwnerId != teamId)
     {
-        LOG_ERROR("bg.battleground", "BG_AV: player defends point which doesn't belong to his team {}", node);
+        LOG_ERROR("bg.battleground", "BG_AV: player defends point which doesn't belong to his team {}", (uint32)node);
         return;
     }
 

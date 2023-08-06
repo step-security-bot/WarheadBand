@@ -87,7 +87,7 @@ void ChannelMgr::LoadChannels()
         ChannelMgr* mgr = forTeam(team);
         if (!mgr)
         {
-            LOG_ERROR("server.loading", "Failed to load custom chat channel '{}' from database - invalid team {}. Deleted.", channelName, team);
+            LOG_ERROR("server.loading", "Failed to load custom chat channel '{}' from database - invalid team {}. Deleted.", channelName, (uint32)team);
             toDelete.push_back({ channelName, team });
             continue;
         }

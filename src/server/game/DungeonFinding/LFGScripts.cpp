@@ -154,7 +154,7 @@ namespace lfg
             LfgState gstate = sLFGMgr->GetState(gguid);
             LfgState state = sLFGMgr->GetState(guid);
             LOG_DEBUG("lfg", "LFGScripts::OnAddMember [{}]: added [{}] leader [{}] gstate: {}, state: {}",
-                gguid.ToString(), guid.ToString(), leader.ToString(), gstate, state);
+                gguid.ToString(), guid.ToString(), leader.ToString(), (uint32)gstate, (uint32)state);
 
             if (state == LFG_STATE_QUEUED)
                 sLFGMgr->LeaveLfg(guid);
@@ -188,7 +188,7 @@ namespace lfg
 
         ObjectGuid gguid = group->GetGUID();
         LOG_DEBUG("lfg", "LFGScripts::OnRemoveMember [{}]: remove [{}] Method: {} Kicker: [{}] Reason: {}",
-            gguid.ToString(), guid.ToString(), method, kicker.ToString(), (reason ? reason : ""));
+            gguid.ToString(), guid.ToString(), (uint32)method, kicker.ToString(), (reason ? reason : ""));
 
         bool isLFG = group->isLFGGroup();
         LfgState state = sLFGMgr->GetState(gguid);

@@ -195,7 +195,7 @@ void TempSummon::Update(uint32 diff)
             }
         default:
             UnSummon();
-            LOG_ERROR("entities.unit", "Temporary summoned creature (entry: {}) have unknown type {} of ", GetEntry(), m_type);
+            LOG_ERROR("entities.unit", "Temporary summoned creature (entry: {}) have unknown type {} of ", GetEntry(), (uint32)m_type);
             break;
     }
 }

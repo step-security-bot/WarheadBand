@@ -150,7 +150,7 @@ uint32 AuctionBotBuyer::GetItemInformation(BuyerConfiguration& config)
         }
     }
 
-    LOG_TRACE("ahbot", "AHBotBuyer: {} items added to buyable/biddable vector for ah type: {}", count, config.GetHouseType());
+    LOG_TRACE("ahbot", "AHBotBuyer: {} items added to buyable/biddable vector for ah type: {}", count, AsUnderlyingType(config.GetHouseType()));
     return count;
 }
 

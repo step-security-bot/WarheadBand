@@ -560,8 +560,8 @@ public:
         if (gameObject)
         {
             handler->PSendSysMessage("LootMode: {}", gameObject->GetLootMode());
-            handler->PSendSysMessage("LootState: {}", gameObject->getLootState());
-            handler->PSendSysMessage("GOState: {}", gameObject->GetGoState());
+            handler->PSendSysMessage("LootState: {}", AsUnderlyingType(gameObject->getLootState()));
+            handler->PSendSysMessage("GOState: {}", AsUnderlyingType(gameObject->GetGoState()));
             handler->PSendSysMessage("PhaseMask: {}", gameObject->GetPhaseMask());
             handler->PSendSysMessage("IsLootEmpty: {}", gameObject->loot.empty());
             handler->PSendSysMessage("IsLootLooted: {}", gameObject->loot.isLooted());

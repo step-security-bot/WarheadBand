@@ -471,7 +471,7 @@ void AuthSession::LogonChallengeCallback(PreparedQueryResult result)
             pkt << uint8(1);
 
         LOG_DEBUG("server.authserver", "'{}:{}' [AuthChallenge] account {} is using '{}' locale ({})",
-            ipAddress, port, _accountInfo.Login, _localizationName, GetLocaleByName(_localizationName));
+            ipAddress, port, _accountInfo.Login, _localizationName, AsUnderlyingType(GetLocaleByName(_localizationName)));
 
         _status = STATUS_LOGON_PROOF;
     }

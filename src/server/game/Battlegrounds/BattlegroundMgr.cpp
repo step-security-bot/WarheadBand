@@ -380,7 +380,7 @@ Battleground* BattlegroundMgr::CreateNewBattleground(BattlegroundTypeId original
     Battleground* bg_template = GetBattlegroundTemplate(bgTypeId);
     if (!bg_template)
     {
-        LOG_ERROR("bg.battleground", "Battleground: CreateNewBattleground - bg template not found for {}", bgTypeId);
+        LOG_ERROR("bg.battleground", "Battleground: CreateNewBattleground - bg template not found for {}", (uint32)bgTypeId);
         return nullptr;
     }
 
@@ -476,7 +476,7 @@ void BattlegroundMgr::LoadBattlegroundTemplates()
         BattlemasterListEntry const* bl = sBattlemasterListStore.LookupEntry(bgTypeId);
         if (!bl)
         {
-            LOG_ERROR("bg.battleground", "Battleground ID {} not found in BattlemasterList.dbc. Battleground not created.", bgTypeId);
+            LOG_ERROR("bg.battleground", "Battleground ID {} not found in BattlemasterList.dbc. Battleground not created.", (uint32)bgTypeId);
             continue;
         }
 
@@ -495,7 +495,7 @@ void BattlegroundMgr::LoadBattlegroundTemplates()
         if (bgTemplate.MaxPlayersPerTeam == 0 || bgTemplate.MinPlayersPerTeam > bgTemplate.MaxPlayersPerTeam)
         {
             LOG_ERROR("db.query", "Table `battleground_template` for id {} contains bad values for MinPlayersPerTeam ({}) and MaxPlayersPerTeam({}).",
-                      bgTemplate.Id, bgTemplate.MinPlayersPerTeam, bgTemplate.MaxPlayersPerTeam);
+                      (uint32)bgTemplate.Id, bgTemplate.MinPlayersPerTeam, bgTemplate.MaxPlayersPerTeam);
 
             continue;
         }
@@ -503,7 +503,7 @@ void BattlegroundMgr::LoadBattlegroundTemplates()
         if (bgTemplate.MinLevel == 0 || bgTemplate.MaxLevel == 0 || bgTemplate.MinLevel > bgTemplate.MaxLevel)
         {
             LOG_ERROR("db.query", "Table `battleground_template` for id {} has bad values for LevelMin ({}) and LevelMax({})",
-                      bgTemplate.Id, bgTemplate.MinLevel, bgTemplate.MaxLevel);
+                      (uint32)bgTemplate.Id, bgTemplate.MinLevel, bgTemplate.MaxLevel);
             continue;
         }
 
@@ -516,7 +516,7 @@ void BattlegroundMgr::LoadBattlegroundTemplates()
             }
             else
             {
-                LOG_ERROR("db.query", "Table `battleground_template` for id {} contains a non-existing WorldSafeLocs.dbc id {} in field `AllianceStartLoc`. BG not created.", bgTemplate.Id, startId);
+                LOG_ERROR("db.query", "Table `battleground_template` for id {} contains a non-existing WorldSafeLocs.dbc id {} in field `AllianceStartLoc`. BG not created.", (uint32)bgTemplate.Id, startId);
                 continue;
             }
 
@@ -527,7 +527,7 @@ void BattlegroundMgr::LoadBattlegroundTemplates()
             }
             else
             {
-                LOG_ERROR("db.query", "Table `battleground_template` for id {} contains a non-existing WorldSafeLocs.dbc id {} in field `HordeStartLoc`. BG not created.", bgTemplate.Id, startId);
+                LOG_ERROR("db.query", "Table `battleground_template` for id {} contains a non-existing WorldSafeLocs.dbc id {} in field `HordeStartLoc`. BG not created.", (uint32)bgTemplate.Id, startId);
                 continue;
             }
         }
@@ -641,12 +641,12 @@ void BattlegroundMgr::SendToBattleground(Player* player, uint32 instanceId, Batt
         uint32 mapid = bg->GetMapId();
         Position const* pos = bg->GetTeamStartPosition(player->GetBgTeamId());
 
-        LOG_DEBUG("bg.battleground", "BattlegroundMgr::SendToBattleground: Sending {} to map {}, {} (bgType {})", player->GetName(), mapid, pos->ToString(), bgTypeId);
+        LOG_DEBUG("bg.battleground", "BattlegroundMgr::SendToBattleground: Sending {} to map {}, {} (bgType {})", player->GetName(), mapid, pos->ToString(), (uint32)bgTypeId);
         player->TeleportTo(mapid, pos->GetPositionX(), pos->GetPositionY(), pos->GetPositionZ(), pos->GetOrientation());
     }
     else
     {
-        LOG_ERROR("bg.battleground", "BattlegroundMgr::SendToBattleground: Instance {} (bgType {}) not found while trying to teleport player {}", instanceId, bgTypeId, player->GetName());
+        LOG_ERROR("bg.battleground", "BattlegroundMgr::SendToBattleground: Instance {} (bgType {}) not found while trying to teleport player {}", instanceId, (uint32)bgTypeId, player->GetName());
     }
 }
 

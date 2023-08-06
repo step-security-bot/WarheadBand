@@ -80,7 +80,7 @@ public:
                 uint32 resetTime = bind.extended ? save->GetExtendedResetTime() : save->GetResetTime();
                 Seconds ttr = (Seconds(resetTime) >= GameTime::GetGameTime() ? Seconds(resetTime) - GameTime::GetGameTime() : 0s);
                 handler->PSendSysMessage("map: {}, inst: {}, perm: {}, diff: {}, canReset: {}, TTR: {}{}",
-                    mapId, save->GetInstanceId(), bind.perm ? "yes" : "no", save->GetDifficulty(), save->CanReset() ? "yes" : "no", Warhead::Time::ToTimeString(ttr), (bind.extended ? " (extended)" : ""));
+                    mapId, save->GetInstanceId(), bind.perm ? "yes" : "no", AsUnderlyingType(save->GetDifficulty()), save->CanReset() ? "yes" : "no", Warhead::Time::ToTimeString(ttr), (bind.extended ? " (extended)" : ""));
                 counter++;
             }
         }
@@ -109,7 +109,7 @@ public:
         for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
         {
             BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUID(), Difficulty(i));
-            for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
+            for (auto itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
             {
                 InstanceSave const* save = itr->second.save;
                 if (itr->first != player->GetMapId() && (!mapId || mapId == itr->first) && (!difficultyArg || difficultyArg == save->GetDifficulty()))
@@ -117,7 +117,7 @@ public:
                     uint32 resetTime = itr->second.extended ? save->GetExtendedResetTime() : save->GetResetTime();
                     Seconds ttr = (Seconds(resetTime) >= GameTime::GetGameTime() ? Seconds(resetTime) - GameTime::GetGameTime() : 0s);
                     handler->PSendSysMessage("unbinding map: {}, inst: {}, perm: {}, diff: {}, canReset: {}, TTR: {}{}",
-                        itr->first, save->GetInstanceId(), itr->second.perm ? "yes" : "no", save->GetDifficulty(), save->CanReset() ? "yes" : "no", Warhead::Time::ToTimeString(ttr), (itr->second.extended ? " (extended)" : ""));
+                        itr->first, save->GetInstanceId(), itr->second.perm ? "yes" : "no", AsUnderlyingType(save->GetDifficulty()), save->CanReset() ? "yes" : "no", Warhead::Time::ToTimeString(ttr), (itr->second.extended ? " (extended)" : ""));
                     sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUID(), itr->first, Difficulty(i), true, player);
                     itr = m_boundInstances.begin();
                     counter++;

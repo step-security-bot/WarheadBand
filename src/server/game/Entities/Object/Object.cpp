@@ -97,7 +97,7 @@ WorldObject::~WorldObject()
     {
         if (GetTypeId() == TYPEID_CORPSE)
         {
-            LOG_FATAL("entities.object", "Object::~Object Corpse {}, type={} deleted but still in map!!", GetGUID().ToString(), ((Corpse*)this)->GetType());
+            LOG_FATAL("entities.object", "Object::~Object Corpse {}, type={} deleted but still in map!!", GetGUID().ToString(), (uint32)((Corpse*)this)->GetType());
             ABORT();
         }
         ResetMap();
@@ -1005,7 +1005,7 @@ void Object::ApplyModFlag64(uint16 index, uint64 flag, bool apply)
 bool Object::PrintIndexError(uint32 index, bool set) const
 {
     LOG_INFO("misc", "Attempt {} non-existed value field: {} (count: {}) for object typeid: {} type mask: {}",
-        (set ? "set value to" : "get value from"), index, m_valuesCount, GetTypeId(), m_objectType);
+        (set ? "set value to" : "get value from"), index, m_valuesCount, (uint32)GetTypeId(), m_objectType);
 
     // ASSERT must fail after function call
     return false;

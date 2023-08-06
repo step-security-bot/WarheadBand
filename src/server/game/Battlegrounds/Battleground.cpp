@@ -124,13 +124,13 @@ Battleground::Battleground()
 
 Battleground::~Battleground()
 {
-    LOG_DEBUG("bg.battleground", "> Remove Battleground {} {} {}", GetName(), GetBgTypeID(), GetInstanceID());
+    LOG_DEBUG("bg.battleground", "> Remove Battleground {} {} {}", GetName(), AsUnderlyingType(GetBgTypeID()), GetInstanceID());
 
     _reviveEvents.KillAllEvents(false);
 
     // remove objects and creatures
     // (this is done automatically in mapmanager update, when the instance is reset after the reset time)
-    uint32 size = uint32(BgCreatures.size());
+    auto size = uint32(BgCreatures.size());
     for (uint32 i = 0; i < size; ++i)
         DelCreature(i);
 
@@ -1784,7 +1784,7 @@ uint32 Battleground::GetTeamScore(TeamId teamId) const
     if (teamId == TEAM_ALLIANCE || teamId == TEAM_HORDE)
         return m_TeamScores[teamId];
 
-    LOG_ERROR("bg.battleground", "GetTeamScore with wrong Team {} for BG {}", teamId, GetBgTypeID());
+    LOG_ERROR("bg.battleground", "GetTeamScore with wrong Team {} for BG {}", (uint32)teamId, (uint32)GetBgTypeID());
     return 0;
 }
 

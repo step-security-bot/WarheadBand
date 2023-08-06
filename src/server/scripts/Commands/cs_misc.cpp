@@ -560,7 +560,7 @@ public:
 
         if (liquidData.Status)
         {
-            handler->PSendSysMessage(LANG_LIQUID_STATUS, liquidData.Level, liquidData.DepthLevel, liquidData.Entry, liquidData.Flags, liquidData.Status);
+            handler->PSendSysMessage(LANG_LIQUID_STATUS, liquidData.Level, liquidData.DepthLevel, liquidData.Entry, liquidData.Flags, AsUnderlyingType(liquidData.Status));
         }
 
         if (object->GetTransport())
@@ -2551,7 +2551,7 @@ public:
                     handler->SendSysMessage(LANG_MOVEGENS_EFFECT);
                     break;
                 default:
-                    handler->PSendSysMessage(LANG_MOVEGENS_UNKNOWN, movementGenerator->GetMovementGeneratorType());
+                    handler->PSendSysMessage(LANG_MOVEGENS_UNKNOWN, (uint32)movementGenerator->GetMovementGeneratorType());
                     break;
             }
         }
